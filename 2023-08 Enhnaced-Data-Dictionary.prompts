@@ -1,0 +1,61 @@
+FIRST PROMPT
+
+write a python function which
+1. takes a dask dataframe as a parameter dd
+2. for each column calculates number of unique values, number of na values, fill rate, percentiles for 1, 5, 25, 50, 75, 95, 99
+3. top ten values by frequency and the frequency count in the format value:frequency
+4. format output as a dask dataframe
+5. use concat to add new rows, do not use append
+6. calculate statistics every if NA values exist
+7. name the function data_statistical_summary
+8. for each column include the data type
+9. if pandas data type is string or categorical then do not calculate percentiles, assign a value of 0 for percentiles
+10. round percentiles to 2 decimal places
+11. from function parameter, isolate the first row, transpose it and add it as a column output dataframe 
+
+
+
+SECOND PROMPT
+
+the above code produces the error below.  please suggest a fix.
+
+/Users/billcgold/anaconda3/envs/e000-gen-ai/bin/python /Users/billcgold/Library/CloudStorage/GoogleDrive-billcgold@gmail.com/Other computers/My Computer/ISyE-6669-DO/GAI/011-Lang-Chain-01/code/002-edd-dask.py 
+Traceback (most recent call last):
+  File "/Users/billcgold/anaconda3/envs/e000-gen-ai/lib/python3.10/site-packages/dask/dataframe/dispatch.py", line 132, in make_meta
+    return make_meta_dispatch(x, index=index)
+  File "/Users/billcgold/anaconda3/envs/e000-gen-ai/lib/python3.10/site-packages/dask/utils.py", line 641, in __call__
+    meth = self.dispatch(type(arg))
+  File "/Users/billcgold/anaconda3/envs/e000-gen-ai/lib/python3.10/site-packages/dask/utils.py", line 635, in dispatch
+    raise TypeError(f"No dispatch for {cls}")
+TypeError: No dispatch for <class 'dict'>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/billcgold/Library/CloudStorage/GoogleDrive-billcgold@gmail.com/Other computers/My Computer/ISyE-6669-DO/GAI/011-Lang-Chain-01/code/002-edd-dask.py", line 64, in <module>
+    summary_ddf = data_statistical_summary(ddf)
+  File "/Users/billcgold/Library/CloudStorage/GoogleDrive-billcgold@gmail.com/Other computers/My Computer/ISyE-6669-DO/GAI/011-Lang-Chain-01/code/002-edd-dask.py", line 44, in data_statistical_summary
+    temp_list = single_col_dd.map_partitions(calc_stats, col, meta=meta)
+  File "/Users/billcgold/anaconda3/envs/e000-gen-ai/lib/python3.10/site-packages/dask/dataframe/core.py", line 1006, in map_partitions
+    return map_partitions(func, self, *args, **kwargs)
+  File "/Users/billcgold/anaconda3/envs/e000-gen-ai/lib/python3.10/site-packages/dask/dataframe/core.py", line 6946, in map_partitions
+    meta = _get_meta_map_partitions(args, dfs, func, kwargs, meta, parent_meta)
+  File "/Users/billcgold/anaconda3/envs/e000-gen-ai/lib/python3.10/site-packages/dask/dataframe/core.py", line 7060, in _get_meta_map_partitions
+    meta = make_meta(meta, index=meta_index, parent_meta=parent_meta)
+  File "/Users/billcgold/anaconda3/envs/e000-gen-ai/lib/python3.10/site-packages/dask/dataframe/dispatch.py", line 136, in make_meta
+    return func(x, index=index)
+  File "/Users/billcgold/anaconda3/envs/e000-gen-ai/lib/python3.10/site-packages/dask/dataframe/backends.py", line 259, in make_meta_object
+    {c: _empty_series(c, d, index=index) for (c, d) in x.items()}, index=index
+  File "/Users/billcgold/anaconda3/envs/e000-gen-ai/lib/python3.10/site-packages/dask/dataframe/backends.py", line 259, in <dictcomp>
+    {c: _empty_series(c, d, index=index) for (c, d) in x.items()}, index=index
+  File "/Users/billcgold/anaconda3/envs/e000-gen-ai/lib/python3.10/site-packages/dask/dataframe/utils.py", line 311, in _empty_series
+    return pd.Series([], dtype=dtype, name=name, index=index)
+  File "/Users/billcgold/anaconda3/envs/e000-gen-ai/lib/python3.10/site-packages/pandas/core/series.py", line 428, in __init__
+    dtype = self._validate_dtype(dtype)
+  File "/Users/billcgold/anaconda3/envs/e000-gen-ai/lib/python3.10/site-packages/pandas/core/generic.py", line 458, in _validate_dtype
+    dtype = pandas_dtype(dtype)
+  File "/Users/billcgold/anaconda3/envs/e000-gen-ai/lib/python3.10/site-packages/pandas/core/dtypes/common.py", line 1706, in pandas_dtype
+    raise TypeError(f"dtype '{dtype}' not understood")
+TypeError: dtype '<class 'list'>' not understood
+
+Process finished with exit code 1
