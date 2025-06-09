@@ -1,0 +1,19 @@
+Recreate "Enhanced Data Dictionary" in Python
+
+Input:    Any Python Data Frame
+Output:   A concise statistical for each column containing:
+          # of unique values, # NA/
+            'Column Name': [col],
+            'Data Type': [dtype],
+            'Num Unique Values': [num_uniques],
+            'NA Values': [num_na],
+            'Fill Rate': [fill_rate],
+            **percentiles ( 1, 5, 25, 50, 75, 95, 99 )
+            'Top 10 Freq': [top_freq]
+            Example Row
+
+Converted code to leverage DASK having never coded with DASK, pretty cool
+
+GPT Link:
+
+https://chatgpt.com/share/6846eb1c-5208-8004-b8f4-f4b008252c23
